@@ -1,0 +1,330 @@
+
+h1{
+    color: 'black';
+    font-size: 37px;
+    margin-left: 15px;
+    transition: all 1.1s;
+    width: min-content;
+}
+
+h3{
+    color: 'black';
+    font-size: 30px;
+    transition: all 1.1s;
+    width: min-content;
+}
+
+/*PC*/
+@media screen and (min-width: 768px){
+    *{
+        transition: all 1.5s;
+    }
+    h1:hover{
+        color: #d9258d;
+        margin-left: 25px;
+        cursor: pointer;
+    }
+    .main{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100vh;
+        transition: all 1.5s;
+        
+    }
+    .center{
+        display: flex;
+        align-items: center;
+        align-self: center;
+        justify-content: center;
+        justify-self: center;
+        flex-direction: column;
+        border-radius: 20px;
+        height: 50%;
+        width: 50%;
+        overflow: hidden;
+    }
+    form{
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        height: 50%;
+        row-gap: 1rem;
+    }
+    input{
+        width: 70%;
+        height: 40px;
+        font-size: 17px;
+        color: #000;
+        font-weight: 400;
+        padding: 5px;
+        padding-left: 10px;
+        background-color: #2f2f2f;
+    }
+    button{
+        width: 72%;
+        font-size: 17px;
+        color: dodgerblue;
+        font-weight: 500;
+        padding: 5px;
+        background-color: #2f2f2f;
+    }
+    button:hover{
+        cursor: pointer;
+        background-color: aliceblue;
+    }
+    .btn-link{
+        width: 72%;
+
+    }
+    .btn{
+        width: 100%;
+        font-size: 17px;
+        color: dodgerblue;
+        font-weight: 500;
+        padding: 5px;
+        background-color: #2f2f2f;
+        border: none !important;
+    }
+    .btn:hover{
+        cursor: pointer;
+        background-color: aliceblue;
+    }
+    .divlink{
+
+        width: 75%;
+        align-items: center;
+        height: 85%;
+        margin: 10px;
+        margin-bottom: 20px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid  gray;
+        border-radius: 15px;
+        padding: 8px;
+        word-break: break-all;
+        
+    }
+    .link{  
+        font-size: 19px;
+        text-decoration: none;
+        font-weight: 500;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+        max-height: 25px;
+        overflow: hidden;
+        text-align: start;
+        justify-content: center;
+        height: 60%;
+        
+    }
+    .divdiv{
+        text-align: start;
+       color: #000;
+        display: flex;
+        flex-direction: row;
+        transition: all 0.2s;
+        max-width: 200px !important;
+        word-break: break-all;
+        
+        justify-content: space-between;
+    }
+    .divdiv:hover{
+        cursor: pointer;
+        background-color: aliceblue;
+        
+    }
+    .center1{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 80%;
+        overflow: hidden;
+    }
+}
+
+/*smartphone*/
+@media screen and (max-width: 768px){
+    *{
+        transition: all 1.5s;
+    }
+    h1:hover{
+        color: #ea4ca8;
+        cursor: pointer;
+        margin-left: 20px;
+    }
+    .main{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100vh;
+        transition: all 1.5s;
+    }
+    .center{
+        display: flex;
+        align-items: center;
+        align-self: center;
+        justify-content: center;
+        justify-self: center;
+        flex-direction: column;
+        border-radius: 20px;
+        height: 50%;
+        width: 80%;
+        overflow: hidden;
+    }
+    .center1{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 71%;
+        overflow: hidden;
+    }
+    form{
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        height: 50%;
+        row-gap: 1rem;
+    }
+    input{
+        width: 70%;
+        height: 30px;
+        font-size: 17px;
+        color: aliceblue;
+        font-weight: 400;
+        padding: 5px;
+        padding-left: 8px;
+        background-color: #2f2f2f;
+    }
+    button{
+        width: 72%;
+        font-size: 17px;
+        color: dodgerblue;
+        font-weight: 500;
+        padding: 5px;
+        background-color: #2f2f2f;
+        border: none !important;
+    }
+    button:hover{
+        cursor: pointer;
+        color: #000;
+    }
+    .btn-link{
+        width: 72%;
+        border: none !important;
+    }
+    .btn{
+        width: 100%;
+        font-size: 17px;
+        color: dodgerblue;
+        font-weight: 500;
+        padding: 5px;
+        background-color: #2f2f2f;
+        border: none !important;
+    }
+    .btn:hover{
+        cursor: pointer;
+        background-color: aliceblue;
+    }
+    .divlink{
+        display: flex;
+        width: 95%;
+        align-items: center;
+        height: 90%;
+        padding-top: 10px;
+        margin-bottom: 20px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        flex-direction: column;
+        border: 1px solid  gray;
+        border-radius: 15px;
+        word-break: break-all;
+        padding-bottom: 5px;
+        
+    }
+    .link{  
+        
+        text-decoration: none;
+        font-weight: 500;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        max-height: 25px;
+        overflow: hidden;
+        text-align: start;
+        word-break: break-all;
+        justify-content: space-between;
+        height: 80px;
+    }
+    .divdiv{
+        text-align: start;
+       color: #000;
+        display: flex;
+        flex-direction: row;
+        transition: all 0.2s;
+        max-width: 200px !important;
+        word-break: break-all;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        margin-left: 8px;
+    }
+    .divdiv:hover{
+        cursor: pointer;
+        background-color: aliceblue;
+        
+    }
+}
+
+.btn-create{
+        width: 80%;
+        font-size: 25px;
+        color: dodgerblue;
+        font-weight: 500;
+        padding: 5px;
+        background-color: #2f2f2f;
+        border: none !important;
+        margin-bottom: 15px;
+        text-align: center;
+}
+.btn-create:hover{
+    cursor: pointer;
+    background-color: aliceblue;
+}
+.title{
+    color: 'black';
+    font-size: 20px;
+    transition: all 1.1s;
+    width: 80%;
+    font-weight: 500;
+    margin-bottom: 20px;
+    opacity: 0.8;
+    text-align: center;
+}
+.back{
+    color: #d9258d;
+    text-align: center;
+    height: 35px;
+}
+.back:hover{
+    background-color: dimgray;
+}
+.rtext{
+    width: 180px;
+    overflow: hidden;
+    word-break: break-all;
+    height: 100%;
+    font-size: 18px;
+}

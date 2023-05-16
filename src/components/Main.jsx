@@ -13,7 +13,8 @@ function Main() {
     const [join, setJoin] = useState(false);
     const navigate = useNavigate();
     const [ListRooms, setListRooms] = useState([]);
-    const id = uuid()
+    const [roomId, setRoomId] = useState({});
+    const id = uuid();
 
     //prevents navigation to go back!
     useEffect(()=>{
@@ -45,6 +46,32 @@ function Main() {
           console.log({id})
     }
 
+    useEffect(() =>{
+        const getRoom = async ()=>{
+            let r;
+            if(ListRooms.length > 0){
+                r = Math.floor(Math.random()*ListRooms.length)
+                setRoomId(ListRooms[r]);
+            }
+            else{
+                setRoomId("pas de room disponible");
+            }
+        }
+        return ()=> getRoom();
+
+    }, [ListRooms, roomId, navigate])
+
+   /* const getRoom = async ()=>{
+        let r;
+        if(ListRooms.length > 0){
+            r = Math.floor(Math.random()*ListRooms.length)
+            setRoomId(ListRooms[r]);
+        }
+        else{
+            setRoomId("pas de room disponible");
+        }
+    }*/
+    //console.log({roomId})
     //get all rooms in the database
     useEffect(()=>{
         const q = query(collection(db, "rooms"), where("join", "==", null));
@@ -75,10 +102,29 @@ function Main() {
                     setCreate(true);
                     setJoin(false);
                 }} className="btn-create">Create</div>
-                <div onClick={()=>{
+                {
+                    roomId === "pas de room disponible"
+                    ?
+                    <Link className="btn-create" style={{textDecoration:"none"}}>
+                <div  onClick={()=>{
                     setCreate(false);
-                    setJoin(true);
-                }} className="btn-create">Join</div>
+                    console.log(roomId)
+                    console.log(ListRooms)
+                    alert("No room available for now, please try again later or create a new room")
+                    //setJoin(true);
+                }}  >Join</div> </Link>
+
+                :
+                <Link className="btn-create" style={{textDecoration:"none"}} to={`/chats?name=${id}&room=${roomId.room}`} >
+                <div  onClick={()=>{
+                    JoinRoom(roomId.id, id)
+                    setCreate(false);
+                    /*console.log(roomId)
+                    console.log(ListRooms)*/
+                    //setJoin(true);
+                }}  >Join</div> </Link>
+
+                }
             </div>
             :
             create === true && join === false

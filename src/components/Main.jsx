@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../css/main.css";
 import { doc, setDoc, collection, query, onSnapshot, where } from "firebase/firestore"; 
 import { db } from "../firebase/Firebase";
 import {v4 as uuid} from 'uuid'
+import { userContext } from "./AppRouter";
 
 
 function Main() {
+    const {userI, setUserI} = useContext(userContext);
     const [name, setName] = useState("");
     const [room, setRoom] = useState("");
     const [create, setCreate] = useState(false);
@@ -15,9 +17,10 @@ function Main() {
     const [ListRooms, setListRooms] = useState([]);
     const [roomId, setRoomId] = useState({});
     const id = uuid();
+    const idr = uuid();
 
     //prevents navigation to go back!
-    useEffect(()=>{
+    /*useEffect(()=>{
         navigate('/', {
             beforeNavigate: (nextLocation) => {
                 if (nextLocation.pahthname !== '/' ) {
@@ -26,25 +29,42 @@ function Main() {
                 return true;
             }
         })
-    },[navigate]);
+    },[navigate]);*/
+
+    
 
     //add rooms to firebase
-    const newRoom = async()=>{
-        await setDoc(doc(db, "rooms", name+room), {
-            name: name,
-            room: room,
-            join: null,
-            created: new Date(),
-          });
+    const newRoom = ()=>{
+        setUserI({ "room": idr, "name": id});
+
+        setTimeout(async()=>{
+            await setDoc(doc(db, "rooms", idr), {
+                name: id,
+                room: idr,
+                join: null,
+                created: new Date(),
+              }).then(()=>{
+                //console.log({userI})
+                navigate("/chats")
+              })
+        }, 500)
     }
 
     // join a room
-    const JoinRoom = async(roomID, id)=>{
-        await setDoc(doc(db, "rooms", roomID), {
-            join: id,
-          }, {merge: true} );
-          console.log({id})
+    const JoinRoom = (roomID)=>{
+        setUserI({name:id, room: roomID });
+
+        setTimeout(async()=>{
+            await setDoc(doc(db, "rooms", roomID), {
+                join: id,
+              }, {merge: true} )
+              .then(()=>{
+                navigate("/chats" )
+              })
+
+        }, 500)
     }
+
 
     useEffect(() =>{
         const getRoom = async ()=>{
@@ -61,17 +81,7 @@ function Main() {
 
     }, [ListRooms, roomId, navigate])
 
-   /* const getRoom = async ()=>{
-        let r;
-        if(ListRooms.length > 0){
-            r = Math.floor(Math.random()*ListRooms.length)
-            setRoomId(ListRooms[r]);
-        }
-        else{
-            setRoomId("pas de room disponible");
-        }
-    }*/
-    //console.log({roomId})
+   
     //get all rooms in the database
     useEffect(()=>{
         const q = query(collection(db, "rooms"), where("join", "==", null));
@@ -97,32 +107,34 @@ function Main() {
 
             ?
             <div className='center'>
-                <div className="title">Create a new chat or Join </div>
-                <div onClick={()=>{
-                    setCreate(true);
+                <div className="title"  onClick={()=>console.log({userI})}>Join</div>
+                {/*<div onClick={()=>{
+                    //setCreate(true);
+                    console.log({userI})
                     setJoin(false);
-                }} className="btn-create">Create</div>
+                }} className="btn-create">Create</div>*/}
                 {
                     roomId === "pas de room disponible"
                     ?
-                    <Link className="btn-create" style={{textDecoration:"none"}}>
-                <div  onClick={()=>{
+                   
+                <div className="btn-create"  onClick={()=>{
+                    newRoom();
                     setCreate(false);
-                    console.log(roomId)
-                    console.log(ListRooms)
-                    alert("No room available for now, please try again later or create a new room")
+                   // console.log(roomId)
+                    //console.log(ListRooms)
+                    
                     //setJoin(true);
-                }}  >Join</div> </Link>
+                }}  >Go chat!</div>
 
                 :
-                <Link className="btn-create" style={{textDecoration:"none"}} to={`/chats?name=${id}&room=${roomId.room}`} >
-                <div  onClick={()=>{
-                    JoinRoom(roomId.id, id)
+                
+                <div className="btn-create"  onClick={()=>{
+                    JoinRoom(roomId.id)
                     setCreate(false);
                     /*console.log(roomId)
                     console.log(ListRooms)*/
                     //setJoin(true);
-                }}  >Join</div> </Link>
+                }}  >Go chat!</div> 
 
                 }
             </div>
@@ -155,7 +167,7 @@ function Main() {
                 {
                     name !== "" && room !== ""
                      ? <Link className="btn-link" to={`/chats?name=${name}&room=${room}`}
-                     onClick={newRoom}
+                    /* onClick={newRoom}*/
                  >
                      <input className="btn" type='submit' 
                      value="Sign in"

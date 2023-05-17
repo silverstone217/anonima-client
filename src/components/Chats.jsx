@@ -5,7 +5,7 @@ import io  from "socket.io-client"
 import "../css/chats.css";
 import { userContext } from "./AppRouter";
 
-const socket = io.connect/*("http://192.168.1.3:5001")*/('https://anonima.onrender.com');
+const socket = io.connect('https://anonima.onrender.com');
 
 function Chats() {
   const {userI, setUserI} = useContext(userContext);
@@ -59,7 +59,7 @@ function Chats() {
     if(userI.name === ""){
       return navigate("/"); 
     }
-  }, [navigate]);
+  }, [navigate, userI]);
   
   return (
     <div className='chats'>
